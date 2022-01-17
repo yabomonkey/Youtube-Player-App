@@ -1,6 +1,7 @@
 package yabomonkey.example.youtubeplayer
 
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
@@ -14,6 +15,7 @@ const val YOUTUBE_VIDEO_ID = "xM9r30X5E40"
 const val YOUTUBE_PLAYLIST = "PLXtTjtWmQhg1SsviTmKkWO5n0a_-T0bnD"
 
 class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener {
+    private val TAG = "YoutubeActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +39,17 @@ class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
     }
 
     override fun onInitializationSuccess(
-        p0: YouTubePlayer.Provider?,
-        p1: YouTubePlayer?,
-        p2: Boolean
+        provider: YouTubePlayer.Provider?,
+        youTubePlayer: YouTubePlayer?,
+        wasRetored: Boolean
     ) {
-        TODO("Not yet implemented")
+        Log.d(TAG, "onInitializationSuccess: provider is ${provider?.javaClass}")
+        Log.d(TAG, "onInitializationSuccess: youTubePlayer is ${youTubePlayer?.javaClass}")
+        Toast.makeText(this, "Initalized youTube Player successfully", Toast.LENGTH_SHORT).show()
+
+        if(wasRetored){
+            youTubePlayer?.cueVideo(YOUTUBE_VIDEO_ID)
+        }
     }
 
     override fun onInitializationFailure(
