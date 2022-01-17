@@ -31,6 +31,9 @@ class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
         playerView.layoutParams = ConstraintLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         layout.addView(playerView)
+
+        playerView.initialize(getString(R.string.GOOGLE_API_KEY), this)
+
     }
 
     override fun onInitializationSuccess(
