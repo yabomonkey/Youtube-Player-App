@@ -48,6 +48,7 @@ class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
         Toast.makeText(this, "Initalized youTube Player successfully", Toast.LENGTH_SHORT).show()
 
         if(wasRetored){
+        youTubePlayer?.setPlayerStateChangeListener(playerStateChangeListener)
             youTubePlayer?.cueVideo(YOUTUBE_VIDEO_ID)
         }
     }
@@ -64,5 +65,28 @@ class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
             val errorMessage = "There was an error initializing the YoutubePlayer ($youTubeInitializationResult)"
             Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
         }
+    }
+    private val playerStateChangeListener = object: YouTubePlayer.PlayerStateChangeListener{
+        override fun onLoading() {
+        }
+
+        override fun onLoaded(p0: String?) {
+        }
+
+        override fun onAdStarted() {
+            Toast.makeText(this@YoutubeActivity, "Click ad now, make creator rich", Toast.LENGTH_SHORT).show()
+        }
+
+        override fun onVideoStarted() {
+            Toast.makeText(this@YoutubeActivity, "Good, video has started", Toast.LENGTH_SHORT).show()
+        }
+
+        override fun onVideoEnded() {
+            Toast.makeText(this@YoutubeActivity, "Congratulations! You've completed another video!", Toast.LENGTH_SHORT).show()
+        }
+
+        override fun onError(p0: YouTubePlayer.ErrorReason?) {
+        }
+
     }
 }
