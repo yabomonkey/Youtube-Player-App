@@ -49,6 +49,7 @@ class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
 
         if(wasRetored){
         youTubePlayer?.setPlayerStateChangeListener(playerStateChangeListener)
+        youTubePlayer?.setPlaybackEventListener(playbackEventListener)
             youTubePlayer?.cueVideo(YOUTUBE_VIDEO_ID)
         }
     }
@@ -66,6 +67,29 @@ class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
             Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
         }
     }
+
+    private val playbackEventListener = object: YouTubePlayer.PlaybackEventListener{
+        override fun onPlaying() {
+            Toast.makeText(this@YoutubeActivity, "Good, video is playing okay", Toast.LENGTH_SHORT).show()
+        }
+
+        override fun onPaused() {
+            Toast.makeText(this@YoutubeActivity, "Good, video is has paused", Toast.LENGTH_SHORT).show()
+        }
+
+        override fun onStopped() {
+            Toast.makeText(this@YoutubeActivity, "Good, video has stopped", Toast.LENGTH_SHORT).show()
+        }
+
+        override fun onBuffering(p0: Boolean) {
+        }
+
+        override fun onSeekTo(p0: Int) {
+        }
+
+
+    }
+
     private val playerStateChangeListener = object: YouTubePlayer.PlayerStateChangeListener{
         override fun onLoading() {
         }
