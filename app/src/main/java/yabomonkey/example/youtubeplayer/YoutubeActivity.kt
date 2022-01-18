@@ -41,15 +41,16 @@ class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
     override fun onInitializationSuccess(
         provider: YouTubePlayer.Provider?,
         youTubePlayer: YouTubePlayer?,
-        wasRetored: Boolean
+        wasRestored: Boolean
     ) {
         Log.d(TAG, "onInitializationSuccess: provider is ${provider?.javaClass}")
         Log.d(TAG, "onInitializationSuccess: youTubePlayer is ${youTubePlayer?.javaClass}")
         Toast.makeText(this, "Initalized youTube Player successfully", Toast.LENGTH_SHORT).show()
 
-        if(wasRetored){
         youTubePlayer?.setPlayerStateChangeListener(playerStateChangeListener)
         youTubePlayer?.setPlaybackEventListener(playbackEventListener)
+
+        if(!wasRestored){
             youTubePlayer?.cueVideo(YOUTUBE_VIDEO_ID)
         }
     }
